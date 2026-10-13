@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Shelf-Life Monitor team data: everyone who has the link can read and write (no login).
+    // Tighten this (e.g. require Firebase Authentication) if the link is shared outside the team.
+    match /shelfLife/{doc=**} {
+      allow read, write: if true;
+    }
+  }
+}
